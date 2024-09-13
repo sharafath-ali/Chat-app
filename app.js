@@ -17,10 +17,13 @@ app.use(express.static('public'))
 let socketsConnected = new Set();
 
 io.on('connection', (socket) => {
-  console.log(socket.id)
-  socketsConnected.add(socket.id)
+  console.log(socket.id);
+  socketsConnected.add(socket.id);
+
+  io.emit("client-total", socketsConnected.size)
 
   socket.on('disconnect', () => {
     socketsConnected.delete(socket.id)
+    io.emit("client-total", socketsConnected.size)
   })
 })
