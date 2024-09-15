@@ -1,4 +1,7 @@
-const socket = io("http://localhost:3000", {})
+// const socket = io("http://localhost:3000", {})
+const socket = io(window.location.origin, {});
+
+console.log(window.location.origin,"ssssssssssssssssslocal")
 
 const clientsTotal = document.getElementById("client-total");
 const messageContainer = document.getElementById("message-container");
@@ -19,7 +22,7 @@ socket.on("client-total", (data) => {
 
 socket.on("message", (data) => {
   console.log(data)
-  messageTone.Play()
+  messageTone.play();
   addMessageToUI(false, data);
 })
 
