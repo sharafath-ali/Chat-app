@@ -26,4 +26,13 @@ io.on('connection', (socket) => {
     socketsConnected.delete(socket.id)
     io.emit("client-total", socketsConnected.size)
   })
+
+  socket.on("message", (data) => {
+    socket.broadcast.emit("message", data)
+    console.log(data)
+  })
+
+  socket.on('feedback', (data) => {
+    socket.broadcast.emit("feedback", data)
+  })
 })
